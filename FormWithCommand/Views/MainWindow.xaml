@@ -1,0 +1,84 @@
+﻿<Window x:Class="FormWithCommand.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FormWithCommand"
+        mc:Ignorable="d"
+        Title="Form" 
+        Icon="/Images/logo.png"
+        Height="630"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Width="400">
+    <Grid Background="#E5E5E5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="6*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Logo & Title -->
+        <Grid Grid.Row="0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Form Logo -->
+            <Ellipse Grid.Column="0"
+                     Style="{StaticResource image}">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="/Images/form.png" 
+                                Stretch="Uniform"/>
+                </Ellipse.Fill>
+            </Ellipse>
+
+            <!-- Label title -->
+            <Label Grid.Column="1"
+                   Style="{StaticResource labelTitle}"/>
+
+
+        </Grid>
+
+        <StackPanel Grid.Row="1">
+
+            <!-- Label & TextBox -->
+            <StackPanel Margin="0 0 0 5">
+                <Label Style="{StaticResource simpleLabel}"
+                       Content="First Name *"/>
+                <Border Style="{StaticResource borderStyle}">
+                    <TextBox Style="{StaticResource textboxStyle}"/>
+                </Border>
+            </StackPanel>
+            <StackPanel Margin="0 0 0 5">
+                <Label Style="{StaticResource simpleLabel}"
+                       Content="Last Name *"/>
+                <Border Style="{StaticResource borderStyle}">
+                    <TextBox Style="{StaticResource textboxStyle}"/>
+                </Border>
+            </StackPanel>
+            <StackPanel Margin="0 0 0 5">
+                <Label Style="{StaticResource simpleLabel}"
+                       Content="Phone *"/>
+                <Border Style="{StaticResource borderStyle}">
+                    <TextBox Style="{StaticResource textboxStyle}"/>
+                </Border>
+            </StackPanel>
+            <StackPanel Margin="0 0 0 5">
+                <Label Style="{StaticResource simpleLabel}"
+                       Content="Email *"/>
+                <Border Style="{StaticResource borderStyle}">
+                    <TextBox Style="{StaticResource textboxStyle}"/>
+                </Border>
+            </StackPanel>
+            
+            <!-- Button -->
+            <Border Style="{StaticResource borderStyleforBtn}"
+                    Name="btn_Border"
+                    Background="Black">
+                <Button Style="{StaticResource BtnStyle}"
+                        Content="Submit"/>
+            </Border>
+        </StackPanel>
+    </Grid>
+</Window>
