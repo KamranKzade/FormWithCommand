@@ -40,45 +40,64 @@
 
         </Grid>
 
-        <StackPanel Grid.Row="1">
+        <StackPanel Name="myStackPanelCore" Grid.Row="1">
 
-            <!-- Label & TextBox -->
-            <StackPanel Margin="0 0 0 5">
-                <Label Style="{StaticResource simpleLabel}"
+            <!-- FirstName -->
+            <Label Style="{StaticResource simpleLabel}"
                        Content="First Name *"/>
-                <Border Style="{StaticResource borderStyle}">
-                    <TextBox Style="{StaticResource textboxStyle}"/>
-                </Border>
-            </StackPanel>
-            <StackPanel Margin="0 0 0 5">
-                <Label Style="{StaticResource simpleLabel}"
+            <TextBox Style="{StaticResource textboxStyle}">
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding FirstNameEnterCommand}" CommandParameter="{Binding ElementName=myStackPanelCore}"/>
+                    <KeyBinding Key="Tab" Command="{Binding FirstNameEnterCommand}" CommandParameter="{Binding ElementName=myStackPanelCore}"/>
+                </TextBox.InputBindings>
+            </TextBox>
+
+
+            <!-- LastName -->
+            <Label Style="{StaticResource simpleLabel}"
                        Content="Last Name *"/>
-                <Border Style="{StaticResource borderStyle}">
-                    <TextBox Style="{StaticResource textboxStyle}"/>
-                </Border>
-            </StackPanel>
-            <StackPanel Margin="0 0 0 5">
-                <Label Style="{StaticResource simpleLabel}"
+            <TextBox Style="{StaticResource textboxStyle}">
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding LastNameEnterCommand}" CommandParameter="{Binding ElementName=myStackPanelCore}"/>
+                    <KeyBinding Key="Tab" Command="{Binding LastNameEnterCommand}" CommandParameter="{Binding ElementName=myStackPanelCore}"/>
+                </TextBox.InputBindings>
+            </TextBox>
+
+
+            <!-- Phone -->
+            <Label Style="{StaticResource simpleLabel}"
                        Content="Phone *"/>
-                <Border Style="{StaticResource borderStyle}">
-                    <TextBox Style="{StaticResource textboxStyle}"/>
-                </Border>
-            </StackPanel>
-            <StackPanel Margin="0 0 0 5">
-                <Label Style="{StaticResource simpleLabel}"
+            <TextBox Style="{StaticResource textboxStyle}">
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding PhoneEnterCommand}" CommandParameter="{Binding ElementName=myStackPanelCore}"/>
+                    <KeyBinding Key="Tab" Command="{Binding PhoneEnterCommand}" CommandParameter="{Binding ElementName=myStackPanelCore}"/>
+                </TextBox.InputBindings>
+            </TextBox>
+
+
+            <!-- Email -->
+            <Label Style="{StaticResource simpleLabel}"
                        Content="Email *"/>
-                <Border Style="{StaticResource borderStyle}">
-                    <TextBox Style="{StaticResource textboxStyle}"/>
-                </Border>
-            </StackPanel>
-            
-            <!-- Button -->
+
+            <TextBox Style="{StaticResource textboxStyle}">
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding EmailEnterCommand}" CommandParameter="{Binding ElementName=myStackPanelCore}"/>
+                    <KeyBinding Key="Tab" Command="{Binding EmailEnterCommand}" CommandParameter="{Binding ElementName=myStackPanelCore}"/>
+                </TextBox.InputBindings>
+            </TextBox>
+
+
+            <!-- Submit Button -->
             <Border Style="{StaticResource borderStyleforBtn}"
                     Name="btn_Border"
                     Background="Black">
                 <Button Style="{StaticResource BtnStyle}"
-                        Content="Submit"/>
+                        Command="{Binding SubmitButtonCommand}" CommandParameter="{Binding ElementName=myStackPanelCore}"
+                        Content="Submit">
+
+                </Button>
             </Border>
+
         </StackPanel>
     </Grid>
 </Window>

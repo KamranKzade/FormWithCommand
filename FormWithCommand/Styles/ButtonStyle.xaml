@@ -5,7 +5,7 @@
         <Setter Property="FontSize" Value="35"/>
         <Setter Property="FontFamily" Value="Times New Roman"/>
         <Setter Property="FontWeight" Value="Medium"/>
-        <Setter Property="Foreground" Value="SpringGreen"/>
+        <Setter Property="Foreground" Value="Yellow"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
