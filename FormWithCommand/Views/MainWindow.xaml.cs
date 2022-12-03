@@ -1,4 +1,7 @@
 ﻿using FormWithCommand.Commands;
+using FormWithCommand.Models;
+using FormWithCommand.Repository;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
@@ -13,6 +16,15 @@ namespace FormWithCommand.Views;
 
 public partial class MainWindow : Window, INotifyPropertyChanged
 {
+    private List<Human> humen;
+
+    public List<Human> Humen
+    {
+        get { return humen; }
+        set { humen = value; OnPropertyChanged(); }
+    }
+
+
     public event PropertyChangedEventHandler? PropertyChanged;
     protected void OnPropertyChanged([CallerMemberName] string name = null!)
     {
@@ -22,8 +34,6 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             handler(this, new PropertyChangedEventArgs(name));
         }
     }
-
-
 
     public RelayCommand FirstNameEnterCommand { get; set; }
     public RelayCommand LastNameEnterCommand { get; set; }
@@ -36,12 +46,13 @@ public partial class MainWindow : Window, INotifyPropertyChanged
     Regex validateEmailRegex = new("^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$");
 
 
-
-
     public MainWindow()
     {
         InitializeComponent();
 
+        Humen = new List<Human>();
+
+        Humen = FakeRepo.GetHumen();
 
         DataContext = this;
 
@@ -65,6 +76,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
 
                 var textBox2 = mystackPanel.Children[3] as TextBox;
                 textBox2!.Focus();
+                button!.IsEnabled = true;
             }
 
         });
@@ -90,6 +102,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
 
                 var PhonetextBox = stackPanel.Children[5] as TextBox;
                 PhonetextBox!.Focus();
+                button!.IsEnabled = true;
             }
         });
 
@@ -108,6 +121,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
 
                 var emailTextbox = stackPanel.Children[7] as TextBox;
                 emailTextbox!.Focus();
+                button!.IsEnabled = true;
             }
             else
             {
@@ -133,6 +147,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
 
                 button!.Foreground = new SolidColorBrush(Colors.SpringGreen);
                 button!.Focus();
+                button!.IsEnabled = true;
             }
             else
             {
@@ -157,18 +172,38 @@ public partial class MainWindow : Window, INotifyPropertyChanged
 
             button!.IsEnabled = true;
 
-            if (firstName!.Text == "Kamran" && lastName!.Text == "Karimzada" && Phone!.Text == "+994 70 370 20 16" && Email!.Text == "311_kamran@mail.ru")
-                MessageBox.Show($"Welcome {firstName.Text} {lastName.Text}", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-            else if (firstName!.Text == string.Empty)
-                MessageBox.Show($"Enter FirstName ", "Information", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-            else if (lastName!.Text == string.Empty)
-                MessageBox.Show($"Enter LastName ", "Information", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-            else if (Phone!.Text == string.Empty)
-                MessageBox.Show($"Enter Phone Number ", "Information", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-            else if (Email!.Text == string.Empty)
-                MessageBox.Show($"Enter Email address ", "Information", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-            else
-                MessageBox.Show($"Wrong ", "Information", MessageBoxButton.OK, MessageBoxImage.Error);
+            foreach (var human in Humen)
+            {
+                if (human.FirstName == firstName!.Text && lastName!.Text == human.LastName &&
+                Phone!.Text == human.PhoneNumber && Email!.Text == human.EmailAddress)
+                {
+                    MessageBox.Show($"Welcome {firstName.Text} {lastName.Text}", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                    return;
+                }
+                else if (firstName!.Text == string.Empty)
+                {
+                    MessageBox.Show($"Enter FirstName ", "Information", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    return;
+                }
+                else if (lastName!.Text == string.Empty)
+                {
+                    MessageBox.Show($"Enter LastName ", "Information", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    return;
+                }
+                else if (Phone!.Text == string.Empty)
+                {
+                    MessageBox.Show($"Enter Phone Number ", "Information", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    return;
+                }
+                else if (Email!.Text == string.Empty)
+                {
+                    MessageBox.Show($"Enter Email address ", "Information", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    return;
+                }
+            }
+            MessageBox.Show("Belə bir Şəxs tapılmadı !!! ", "Information", MessageBoxButton.OK, MessageBoxImage.Error);
+
+
         });
     }
 
